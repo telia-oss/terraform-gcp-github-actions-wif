@@ -1,0 +1,85 @@
+name: Terraform CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.0
+
+      - name: Terraform Fmt
+        id: fmt
+        run: |
+          OUTPUT=$(terraform fmt -check -no-color)
+          echo "::set-output name=output::$OUTPUT"
+        continue-on-error: true
+
+      - name: Terraform Init
+        id: init
+        run: terraform init -backend=false
+        continue-on-error: true
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+        continue-on-error: true
+
+      - uses: terraform-linters/setup-tflint@v3
+        name: Setup TFLint
+        with:
+          tflint_version: v0.44.1
+          
+      - name: Terraform Lint
+        id: tflint
+        run: |
+          OUTPUT=$(tflint)
+          echo "::set-output name=output::$OUTPUT"
+        continue-on-error: true
+
+      - name: Create comment on failure
+        if: ${{ steps.fmt.outcome == 'failure' || steps.init.outcome == 'failure' || steps.validate.outcome == 'failure' || steps.tflint.outcome == 'failure' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fmtOutput = `${{ steps.fmt.outputs.output }}`
+            const initOutput = `${{ steps.init.outputs.output }}`
+            const validateOutput = `${{ steps.validate.outputs.output }}`
+            const tflintOutput = `${{ steps.tflint.outputs.output }}`
+
+            let message = `There were errors in the Terraform checks:\n\n`
+            if (fmtOutput) message += `**Terraform Fmt:**\n\`\`\`\n${fmtOutput}\n\`\`\`\n`
+            if (initOutput) message += `**Terraform Init:**\n\`\`\`\n${initOutput}\n\`\`\`\n`
+            if (validateOutput) message += `**Terraform Validate:**\n\`\`\`\n${validateOutput}\n\`\`\`\n`
+            if (tflintOutput) message += `**Terraform Lint:**\n\`\`\`\n${tflintOutput}\n\`\`\`\n`
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            })
+
+      - name: Create comment on success
+        if: ${{ steps.fmt.outcome == 'success' && steps.init.outcome == 'success' && steps.validate.outcome == 'success' && steps.tflint.outcome == 'success' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const message = `All Terraform checks passed successfully! 🎉`
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: message
+            })
