@@ -10,40 +10,40 @@ output "github_repository_environments" {
   description = "Information about the created GitHub repository environments."
 }
 
-/*output "azure_client_id_secrets" {
+/*output "gcp_client_id_secrets" {
   value = {
-    for key, secret in github_actions_environment_secret.azure_client_id : key => {
+    for key, secret in github_actions_environment_secret.gcp_client_id : key => {
       repository      = secret.repository
       environment     = secret.environment
       secret_name     = secret.secret_name
       plaintext_value = secret.plaintext_value
     }
   }
-  description = "Information about the AZURE_CLIENT_ID secrets for GitHub repository environments."
+  description = "Information about the gcp_CLIENT_ID secrets for GitHub repository environments."
 }
 
-output "azure_project_id_secrets" {
+output "gcp_project_id_secrets" {
   value = {
-    for key, secret in github_actions_environment_secret.azure_project_id : key => {
+    for key, secret in github_actions_environment_secret.gcp_project_id : key => {
       repository      = secret.repository
       environment     = secret.environment
       secret_name     = secret.secret_name
       plaintext_value = secret.plaintext_value
     }
   }
-  description = "Information about the AZURE_project_id secrets for GitHub repository environments."
+  description = "Information about the gcp_project_id secrets for GitHub repository environments."
 }
 
-output "azure_tenant_id_secrets" {
+output "gcp_tenant_id_secrets" {
   value = {
-    for key, secret in github_actions_environment_secret.azure_tenant_id : key => {
+    for key, secret in github_actions_environment_secret.gcp_tenant_id : key => {
       repository      = secret.repository
       environment     = secret.environment
       secret_name     = secret.secret_name
       plaintext_value = secret.plaintext_value
     }
   }
-  description = "Information about the AZURE_TENANT_ID secrets for GitHub repository environments."
+  description = "Information about the gcp_TENANT_ID secrets for GitHub repository environments."
 }
 
 output "standard_role_assignments" {

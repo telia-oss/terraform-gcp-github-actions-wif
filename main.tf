@@ -1,7 +1,7 @@
-# The main.tf file for the terraform-azure-github-actions-wif module
+# The main.tf file for the terraform-gcp-github-actions-wif module
 #
 # This file contains the core resources and logic for the module,
-# integrating GitHub Actions with Workload Identity Federation for Microsoft Azure.
+# integrating GitHub Actions with Workload Identity Federation for Google Cloud.
 #
 
 

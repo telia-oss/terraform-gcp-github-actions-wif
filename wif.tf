@@ -1,13 +1,11 @@
-# The app_registration.tf file for the terraform-azure-github-actions-wif module
+# The app_registration.tf file for the terraform-gcp-github-actions-wif module
 #
-# This file contains resources related to the Azure Active Directory application registrations,
+# This file contains resources related to the Google Service Accounts registrations,
 # service principals, and federated identity credentials for the GitHub OIDC app.
 #
 
 
 locals {
-
-  //application_owners = var.owners == null ? [data.azurerm_client_config.current.object_id] : var.owners
 
   environments_to_create_sa = [
     for env in local.repo_environments : env if env.sa_email == null
@@ -17,7 +15,6 @@ locals {
     for env in local.repo_environments : env if env.sa_email != null
   ]
 
-  //subject_template_path = var.override_subject_template_path != null ? var.override_subject_template_path : "${path.module}/templates/subject_template.tpl"
 }
 
 resource "random_string" "unique_sa_name" {
@@ -39,7 +36,6 @@ module "service_accounts" {
   display_name = "sa-${each.value.name_prefix}-${each.value.repository_name}"
   names        = [replace("${each.value.environment}", "/", "-")]
 }
-//"${random_string.unique_sa_name["${each.value.repository_name}-${each.value.project_id}-${each.value.environment}"].result}-
 
 data "google_service_account" "lookup" {
   for_each = {

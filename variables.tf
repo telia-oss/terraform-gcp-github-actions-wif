@@ -38,7 +38,7 @@ variable "repositories" {
 
 variable "audience_name" {
   type        = string
-  default     = "api://AzureADTokenExchange"
+  default     = "google-wlif"
   description = "The value is the audience name for the GitHub OIDC provider."
 }
 

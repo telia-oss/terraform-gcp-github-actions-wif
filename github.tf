@@ -1,8 +1,8 @@
 
-# The github.tf file for the terraform-azure-github-actions-wif module
+# The github.tf file for the terraform-gcp-github-actions-wif module
 #
 # This file contains resources for managing GitHub repository environments,
-# creating secrets for Azure authentication in GitHub Actions environments,
+# creating secrets for GCP authentication in GitHub Actions environments,
 # and other GitHub-related configurations.
 #
 
