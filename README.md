@@ -26,7 +26,7 @@ See references below for more information about Workload Identity Federation for
 
 ## Usage
 
-The following example creates a new GCP service account and IAM role for each environment in the repository `rickardl/teliacompany-gcp-wif-test`. The service account is assigned the built-in IAM roles `roles/compute.networkAdmin` and `roles/appengine.appAdmin` for the project `seismic-shape-293115` in the environment `development`.
+The following example creates a new GCP service account and IAM role for each environment in the repository `teliacompany-gcp-wif-test`. The service account is assigned the built-in IAM roles `roles/compute.networkAdmin` and `roles/appengine.appAdmin` for the project `seismic-shape-293115` in the environment `development`.
 
 ```hcl
 module "gha_repo1" {
@@ -37,7 +37,7 @@ module "gha_repo1" {
 
   repositories = [
     {
-      repository_name = "rickardl/teliacompany-gcp-wif-test"
+      repository_name = "teliacompany-gcp-wif-test"
       environments = [
         {
           environment    = "development"
@@ -72,9 +72,9 @@ Please see the [examples](./examples) directory for examples of how to use this 
 
 | Name                                                       | Version |
 | ---------------------------------------------------------- | ------- |
-| <a name="provider_github"></a> [github](#provider\_github) | 5.21.1  |
-| <a name="provider_google"></a> [google](#provider\_google) | 4.60.2  |
-| <a name="provider_random"></a> [random](#provider\_random) | ~>3.4   |
+| <a name="provider_github"></a> [github](#provider\_github) | 5.37.0  |
+| <a name="provider_google"></a> [google](#provider\_google) | 4.83.0  |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.5.1   |
 
 ## Modules
 
