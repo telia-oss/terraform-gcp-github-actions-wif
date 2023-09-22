@@ -1,5 +1,3 @@
-
-
 output "github_repository_environments" {
   value = {
     for key, env in github_repository_environment.repo_environment : key => {
