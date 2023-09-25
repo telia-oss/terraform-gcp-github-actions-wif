@@ -2,8 +2,6 @@
 #
 # This file contains resources for managing role assignments in Azure,
 # including both standard and inline role assignments for the configured repositories and environments.
-#
-
 
 locals {
 

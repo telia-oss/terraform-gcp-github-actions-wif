@@ -6,26 +6,26 @@ module "gha_repo1" {
 
   repositories = [
     {
-      repository_name = "rickardl/teliacompany-gcp-wif-test"
+      repository_name = "terraform-gcp-github-actions-wif"
       environments = [
         {
           environment = "development"
-          name_prefix = "app1-dev"
+          name_prefix = "demo123-dev"
           project_id  = "seismic-shape-293115"
           tags = {
             Environment = "development"
-            Application = "App1"
+            Application = "Demo1"
           }
           project_roles = ["roles/compute.networkAdmin", "roles/appengine.appAdmin"]
         },
 
         {
           environment = "production"
-          name_prefix = "app1-prod"
+          name_prefix = "demo123-prod"
           project_id  = "seismic-shape-293115"
           tags = {
             Environment = "production"
-            Application = "App1"
+            Application = "Demo2"
           }
           project_roles = ["roles/compute.networkAdmin", "roles/appengine.appAdmin"]
         }

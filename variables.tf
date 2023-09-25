@@ -1,4 +1,3 @@
-
 variable "name_prefix" {
   description = "The value is a prefix for the name of the resources created."
   type        = string
@@ -54,6 +53,11 @@ variable "default_tags" {
   default = {
     "CreatedBy" = "Terraform"
   }
+}
+
+# The default tags to apply to all resources in this module
+locals {
+  tags = merge(var.default_tags, var.user_defined_tags, { "Environment" = var.environment })
 }
 
 variable "owners" {

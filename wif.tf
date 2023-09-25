@@ -2,8 +2,6 @@
 #
 # This file contains resources related to the Google Service Accounts registrations,
 # service principals, and federated identity credentials for the GitHub OIDC app.
-#
-
 
 locals {
 
