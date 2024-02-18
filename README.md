@@ -1,7 +1,5 @@
 # Terraform GCP GitHub Actions Workload Identity Federation (WIF) Module
 
-> **WARNING:** This module is currently under active development and is not yet ready for production use.
-
 This Terraform module integrates GitHub Actions with Workload Identity Federation for Google Cloud Platform (GCP). It simplifies the process of setting up and managing GCP IAM for GitHub Actions environments by creating the necessary resources and configuring the required secrets.
 
 ## Background
